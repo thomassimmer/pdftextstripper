@@ -1,0 +1,37 @@
+[project]
+name = "pdftextstripper"
+version = "1.0.1"
+description = "Text stripper for PDFs."
+readme = "README.md"
+keywords = ["pdf", "stripper", "python"]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "pytest-runner"]
+build-backend = "setuptools.build_meta"
+
+[options]
+tests_require = ["pytest==8.2.2"]
+packages = ["find:"]
+install_requires = ["pdfminer.six==20231228"]
+
+[metadata]
+name = "pdftextstripper"
+version = "0.0.1"
+license = "Apache License 2.0"
+author = "Thomas Simmer"
+author_email = "thomas.simmer@hotmail.fr"
+description = "Text stripper for PDFs."
+long_description = "file: README.md"
+long_description_content_type = "text/markdown"
+url = "https://github.com/thomassimmer"
+homepage = "https://github.com/thomassimmer"
+project_urls = { repository = "https://github.com/thomassimmer/pdftextstripper" }
+keywords = "pdf stripper python"
