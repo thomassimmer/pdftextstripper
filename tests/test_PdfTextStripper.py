@@ -55,6 +55,24 @@ l | INFO-VENTE:Montreux-Vevey Tourisme Grand-Place 29 Vevey  |
 l | PARTENAIRE SURFCARD:Naville St-Antoine Av. Général Guisan 15 Vevey  |"""
 
         self.assertEqual(output, expected_output)
+        test_file.close()
+
+    def test_sample2_output(self):
+        this_folder_path = os.path.dirname(os.path.realpath(__file__))
+        test_file_path = os.path.join(this_folder_path, "assets", "sample2.pdf")
+        test_file = open(test_file_path, 'rb')
+
+        doc = extract_pages(test_file)
+        page = next(doc)
+
+        stripper = PdfTextStripper()
+        output = stripper.process_page(page)
+
+        expected_output = """Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite  | t,  | A1 | 100 000 | Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite … | t,  | A2 | 200 000 | Laodripeimsc iinpgsu emlit  d… | olor sit amet, consectetur aaa   | A3 | 300 000 |
+… |"""
+
+        self.assertEqual(output, expected_output)
+        test_file.close()
 
 
 if __name__ == '__main__':

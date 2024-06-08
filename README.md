@@ -6,7 +6,7 @@ Inspired by the Java's library [PDFLayoutTextStripper](https://github.com/Jonath
 
 It can be helpful to parse PDF tables.
 
-# Install
+## Install
 
 Clone this repository, go in its root folder and run:
 
@@ -14,7 +14,7 @@ Clone this repository, go in its root folder and run:
 pip install .
 ```
 
-# Use
+## Use
 
 ```python
 from pdfminer.high_level import extract_pages
@@ -30,13 +30,15 @@ text = stripper.process_page(page)
 print(text)
 ```
 
-# Example
+## Example
 
-## Results if you use [PDFLayoutTextStripper](https://github.com/JonathanLink/PDFLayoutTextStripper)
+### Use case 1: Not many characters on one line
+
+#### Results if you use [PDFLayoutTextStripper](https://github.com/JonathanLink/PDFLayoutTextStripper)
 
 ![example](sample.png)
 
-## Results if you use pdftextstripper
+#### Results if you use pdftextstripper
 
 ```
 201 | Heure de départ pour le trajet |
@@ -74,13 +76,33 @@ l | INFO-VENTE:Montreux-Vevey Tourisme Grand-Place 29 Vevey  |
 l | PARTENAIRE SURFCARD:Naville St-Antoine Av. Général Guisan 15 Vevey  |
 ```
 
-# Notes
+### Use case 2: Many characters on one line
+
+![example](sample2.png)
+
+
+#### Results if you use [PDFLayoutTextStripper](https://github.com/JonathanLink/PDFLayoutTextStripper)
+
+```
+     Lorem ipsum dolor  sit amet,  A1 100  000 Lorem  ipsum  dolor  sit  amet, A2 200 000 Lorem  ipsum  dolor sit  amet,  consectetur  aaa    A3300
+     consectetur  adipiscing  elit           consectetur  adipiscing  elit …           adipiscing  elit  …
+     …
+```
+
+#### Results if you use pdftextstripper
+
+```
+Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite  | t,  | A1 | 100 000 | Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite … | t,  | A2 | 200 000 | Laodripeimsc iinpgsu emlit  d… | olor sit amet, consectetur aaa   | A3 | 300 000 |
+… |
+```
+
+## Notes
 
 While [PDFLayoutTextStripper](https://github.com/JonathanLink/PDFLayoutTextStripper) is great, it is not written in Python, and trying to convert it to Python did not work well for me. I needed to use pdfminer.six to get the position of every glyph in the document. However, the results were not very good because PDFLayoutTextStripper uses a fixed length for the line, which does not allow all content to be displayed correctly when there are different font sizes or simply lots of text.
 
 This library instead tries to keep all the content of the lines intact.
 
-# How does it work ?
+## How does it work ?
 
 1. We get all characters of the document with their positions, replacing spaces ` ` and newlines `\n` with pipes `|` for better visualization.
 2. We sort the characters in the Y-direction.
