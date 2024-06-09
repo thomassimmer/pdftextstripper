@@ -42,10 +42,16 @@ print(text)
 
 ```
 201 | Heure de départ pour le trajet |
-sfi |  |  | 02'' |  | VL'eUvneioyn |  Gare | VH | illeneLUuNvDeI  A-U V VeENvDeRy | EDI | SAMEDI | DIMAgNénCéHrEa leets |  fêtes  |
-tamixor |  |  |  |  |  |  | 34'' |  | BVeervgeèyr e | Funiculaire | 0056 |  |   1442  2530 |  39 49 59 |   4124  5203 |  39 49 59 |  10 30 50 |
+sfi |  |  | 0' | Vevey Gare | Villeneuve - Vevey | DIMANCHE et fêtes  |
+2' | L'Union | H | LUNDI AU VENDREDI | SAMEDI | générales |
+t | 05 |  42 50 |  42 50 |
+a | 3' | Bergère |
+mi |  | 4' | Vevey Funiculaire | 06 |  14 23 39 49 59 |  14 23 39 49 59 |  10 30 50 |
+x |
+or |  |
 pp |  |
-asr |  |  | 07 |  04 19 29 39 49 59 |  04 19 29 39 49 59 |  10 30 50 |
+a | 07 |  04 19 29 39 49 59 |  04 19 29 39 49 59 |  10 30 50 |
+sr |  |
 u |
 ocr |  |  | 08 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  10 30 50 |
 a |
@@ -53,7 +59,8 @@ p |
 e | 09 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  10 30 50 |
 d |
 s |
-pme |  |  | 10 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  10 32 52 |
+p | 10 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  10 32 52 |
+me |  |
 T | 11 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  12 32 52 |
 12 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  12 32 42 52 |
 13 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  02 12 22 29 39 49 59 |
@@ -64,8 +71,10 @@ T | 11 |  09 19 29 39 49 59 |  09 19 29 39 49 59 |  12 32 52 |
 18 |  01 11 21 31 39 49 59 |  09 19 29 39 49 59 |  09 19 29 39 49 |
 19 |  09 19 39 58 |  09 19 38 58 |  09 19 38 58 |
 Arrêt sur demande | 20 |  18 40 |  18 40 |  18 40 |
-SFOETNETS :CNOoNuSvIeDl-EARnE, S2 C jaOnMviMerE,  VJOenUdRrSe dDiE  |   | 21 |  00 20 40 |  00 20 40 |  00 20 40 |
-SLuainndti,  dLuen Pdein dtee cPôâtqeu, e1se,r A asocûetn,s Liounn,d  | i du  | 22 |  00 20 40 |  00 20 40 |  00 20 40 |
+SONT CONSIDERES COMME JOURS DE  | 21 |  00 20 40 |  00 20 40 |  00 20 40 |
+FETES:Nouvel-An, 2 janvier, Vendredi  |
+Saint, Lundi de Pâques, Ascension,  | 22 |  00 20 40 |  00 20 40 |  00 20 40 |
+Lundi de Pentecôte, 1er août, Lundi du  |
 Jeûne Fédéral, Noël | 23 |  00 20 40 56 |  00 20 40 56 |  00 20 40 56 |
 Abonnement Voie 7 non valable | 24 |  36 |  36 |
 01 |  05X |  05X |
@@ -92,7 +101,8 @@ l | PARTENAIRE SURFCARD:Naville St-Antoine Av. Général Guisan 15 Vevey  |
 #### Results if you use pdftextstripper
 
 ```
-Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite  | t,  | A1 | 100 000 | Lcoonresmec itpestuurm a ddiopliosrc isnitg a emlite … | t,  | A2 | 200 000 | Laodripeimsc iinpgsu emlit  d… | olor sit amet, consectetur aaa   | A3 | 300 000 |
+Lorem ipsum dolor sit amet,  | A1 | 100 000 | Lorem ipsum dolor sit amet,  | A2 | 200 000 | Lorem ipsum dolor sit amet, consectetur aaa   | A3 | 300 000 |
+consectetur adipiscing elit  | consectetur adipiscing elit … | adipiscing elit … |
 … |
 ```
 
@@ -109,6 +119,8 @@ This library instead tries to keep all the content of the lines intact.
 3. We build the output line by line by adding the characters.
 4. We start a new line when the new character's Y-position is more than the previous one's Y-position plus its height.
 5. Once a new line is detected, we sort the elements on this line in the X-direction.
+6. We try to detect new lines again on this line by running the step 4.
+7. And so on.
 
 ## Support
 

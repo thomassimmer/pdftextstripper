@@ -94,12 +94,28 @@ class PdfTextStripper:
 
     def write_line(self, ):
         if self.current_line_text_positions:
-            text_line = ''
 
-            for text_position in self.current_line_text_positions:
-                text_line += text_position['text']
+            # Try to detect new lines again in this line.
+            while self.current_line_text_positions:
+                next_line_text_positions = []
+                self.previous_text_position = None
+                text_line = ''
 
-            self.result += text_line.strip()
+                for text_position in self.current_line_text_positions:
+                    number_of_new_lines = self.get_number_of_new_lines_from_previous_text_position(text_position)
+
+                    if number_of_new_lines == 0:
+                        text_line += text_position['text']
+                        self.previous_text_position = text_position
+                    else:
+                        next_line_text_positions.append(text_position)
+
+                self.result += text_line.strip()
+
+                if next_line_text_positions:
+                    self.result += "\n"
+
+                self.current_line_text_positions = next_line_text_positions
 
     def create_new_empty_lines(self, number_of_new_lines):
         for _ in range(number_of_new_lines):
@@ -120,3 +136,21 @@ class PdfTextStripper:
             return number_of_lines
         else:
             return 0
+
+
+# For quick debug. Run this from root folder: python src/pdftextstripper/PdfTextStripper.py
+# if __name__ == '__main__':
+
+#     from pdfminer.high_level import extract_pages
+#     import os
+
+#     test_file_path = os.path.join("tests", "assets", "sample.pdf")
+#     test_file = open(test_file_path, 'rb')
+
+#     doc = extract_pages(test_file)
+#     page = next(doc)
+
+#     stripper = PdfTextStripper()
+#     output = stripper.process_page(page)
+
+#     print(output)
